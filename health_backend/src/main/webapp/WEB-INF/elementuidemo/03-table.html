@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="../js/vue.js"></script>
+    <script src="../js/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <template >
+        <el-table :data="tableData" stripe style="width: 90% " >
+            <el-table-column prop="date" label="日期" width="400"></el-table-column>
+            <el-table-column prop="name" label="姓名" width="400"></el-table-column>
+            <el-table-column prop="address" label="地址"></el-table-column>
+            <el-table-column fixed="right" label="操作" width="200">
+                <template slot-scope="scope">
+                    <el-button @click="handleClick(scope.row)" type="primary" size="small">查看</el-button>
+                    <el-button type="primary" size="small">编辑</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </template>
+
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-sizes="[ 2, 3, 4]"
+            :page-size="3"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="12">
+    </el-pagination>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            tableData: [
+                {id: "1", date: "2010-10-10", name: "阿大", address: "武汉"},
+                {id: "2", date: "2010-10-10", name: "阿珍", address: "北京"},
+                {id: "3", date: "2010-10-10", name: "阿强", address: "厦门"},
+                {id: "4", date: "2010-10-10", name: "阿强", address: "厦门"},
+                {id: "5", date: "2010-10-10", name: "阿强", address: "厦门"}
+
+
+            ]
+
+        },
+        methods:{
+            handleClick:function (row) {
+                alert(row.id);
+            }
+        }
+    });
+</script>
+</body>
+</html>
