@@ -318,7 +318,7 @@
             },
             // 重置表单
             resetForm() {
-                this.formData={};
+                this.formData = {};
                 // this.$refs["dataAddForm"].clearValidate();
             },
             // 弹出添加窗口
@@ -348,6 +348,17 @@
                 this.pagination.currentPage = currentPage;
                 this.findPage()
             },
+
+            showMessage(res){
+                if (res == "Error: Request failed with status code 403") {
+                    //权限不足
+                    this.$message.error('无访问权限');
+                    return;
+                } else {
+                    this.$message.error('未知错误');
+                    return;
+                }
+            },
             // 删除
             handleDelete(row) {
                 this.$confirm("你确定要删除吗?", "提示", {
@@ -369,7 +380,9 @@
                             this.$message.error(res.data.message);
 
                         }
-                    })
+                    }).catch((res) => {
+                        this.showMessage(res);
+                    });
                 }).catch(() => {
                     //点击取消后执行删除操作
                     this.$message({
